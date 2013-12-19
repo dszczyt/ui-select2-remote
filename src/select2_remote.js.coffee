@@ -96,7 +96,7 @@ geniustradeApp.directive(
         $scope[$attrs["uiSelect2"]] = angular.extend(
           $scope[$attrs.uiSelect2] || {}
           initSelection: (element, callback) ->
-            console.debug element, callback
+          #  console.debug element, callback
           # initSelection: (element, callback) ->
           #   console.debug controller
           #   console.log controller.$viewValue, $attrs
@@ -130,60 +130,4 @@ geniustradeApp.directive(
           )
         )
     }
-)
-
-initSelectionWithSupplierId = ($scope, url, callback) ->
-  $.getJSON(
-    url
-    supplier_id: $scope.quotation.supplier.id
-    callback
-  )
-  # $http
-  #   .get(
-  #     url
-  #     data:
-  #       supplier_id: $scope.quotation.supplier.id
-  #   )
-  #   .success(callback)
-
-geniustradeApp.directive(
-  'select2RemoteAddress'
-  ->
-    ($scope, $element, $attrs) ->
-      $scope[$attrs.uiSelect2] = angular.extend(
-        $scope[$attrs.uiSelect2] || {}
-        initSelection: (element, callback) ->
-          initSelectionWithSupplierId($scope, "/addresses/#{$element.val().toString()}.json", callback)
-        formatResult: (result, container, query) ->
-          formatResult(result, container, query, $attrs.select2DisplayKey || 'to_s')
-        formatSelection: (data, container) ->
-          formatSelection(data, container, $attrs.select2DisplayKey || 'to_s')
-        ajax: ajax(
-          "/addresses.json"
-          ->
-            supplier_id: $scope.quotation.supplier.id
-            filtered: true
-        )
-      )
-)
-
-geniustradeApp.directive(
-  'select2RemoteContact'
-  ->
-    ($scope, $element, $attrs) ->
-      $scope[$attrs.uiSelect2] = angular.extend(
-        $scope[$attrs.uiSelect2] || {}
-        initSelection: (element, callback) ->
-          initSelectionWithSupplierId($scope, "/contacts/#{$element.val().toString()}.json", callback)
-        formatResult: (result, container, query) ->
-          formatResult(result, container, query, $attrs.select2DisplayKey || 'to_s')
-        formatSelection: (data, container) ->
-          formatSelection(data, container, $attrs.select2DisplayKey || 'to_s')
-        ajax: ajax(
-          "/contacts.json"
-          ->
-            supplier_id: $scope.quotation.supplier.id
-            filtered: true
-        )
-      )
 )
