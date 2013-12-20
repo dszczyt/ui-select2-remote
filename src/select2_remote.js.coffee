@@ -131,3 +131,45 @@ geniustradeApp.directive(
         )
     }
 )
+
+geniustradeApp.directive(
+  'select2Width'
+  [
+    ->
+      {
+        link: ($scope, $element, $attrs) ->
+          $scope[$attrs.uiSelect2] = $.extend(
+            $scope[$attrs.uiSelect2]
+            width: $attrs.select2Width
+          )
+      }
+  ]
+)
+
+geniustradeApp.directive(
+  'select2AllowClear'
+  [
+    ->
+      {
+        link: ($scope, $element, $attrs) ->
+          $scope[$attrs.uiSelect2] = $.extend(
+            $scope[$attrs.uiSelect2]
+            allowClear: $attrs.select2AllowClear
+          )
+      }
+  ]
+)
+
+geniustradeApp.directive(
+  'select2Multiple'
+  [
+    ->
+      {
+        link: ($scope, $element, $attrs) ->
+          $scope[$attrs.uiSelect2] = $.extend(
+            $scope[$attrs.uiSelect2]
+            multiple: $attrs.select2Multiple
+          )
+      }
+  ]
+)
